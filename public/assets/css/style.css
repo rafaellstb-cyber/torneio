@@ -1,9 +1,7 @@
 :root {
-    /* Paleta baseada na logo do #3 Torneio Entre Amigos: azul, laranja e amarelo-sol.
-       Azul propositalmente mais claro e "puro" (menos esverdeado) que a tinta
-       azul-petróleo da logo, para não se confundir com ela no cabeçalho. */
-    --navy-1: #1a5f96;
-    --navy-2: #2f8fd1;
+    /* Paleta baseada na logo do #3 Torneio Entre Amigos: azul-petróleo, laranja e amarelo-sol */
+    --navy-1: #0c3a49;
+    --navy-2: #146b81;
     --accent: #f2661e;
     --accent-2: #ffc93d;
     --verde-bg: #d9f2df;
