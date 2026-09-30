@@ -34,12 +34,12 @@ $activeNav = $activeNav ?? '';
     </button>
     <div class="collapse navbar-collapse" id="navMenu">
       <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
-        <li class="nav-item"><a class="nav-link <?= $activeNav === 'inicio' ? 'active' : '' ?>" href="/index.php">Início</a></li>
-        <li class="nav-item"><a class="nav-link <?= $activeNav === 'ranking' ? 'active' : '' ?>" href="/ranking.php">Ranking</a></li>
-        <li class="nav-item"><a class="nav-link <?= $activeNav === 'jogos' ? 'active' : '' ?>" href="/jogos.php">Jogos</a></li>
-        <li class="nav-item"><a class="nav-link <?= $activeNav === 'matamata' ? 'active' : '' ?>" href="/mata-mata.php">Mata-mata</a></li>
-        <li class="nav-item"><a class="nav-link <?= $activeNav === 'lancar' ? 'active' : '' ?>" href="/lancar.php">Lançar resultado</a></li>
-        <li class="nav-item ms-lg-2 mt-2 mt-lg-0"><a class="nav-link btn-admin-nav d-inline-block" href="/admin/">Admin</a></li>
+        <li class="nav-item"><a class="nav-link <?= $activeNav === 'inicio' ? 'active' : '' ?>" href="/index.php"><i class="bi bi-house-door-fill me-2"></i>Início</a></li>
+        <li class="nav-item"><a class="nav-link <?= $activeNav === 'ranking' ? 'active' : '' ?>" href="/ranking.php"><i class="bi bi-bar-chart-line-fill me-2"></i>Ranking</a></li>
+        <li class="nav-item"><a class="nav-link <?= $activeNav === 'jogos' ? 'active' : '' ?>" href="/jogos.php"><i class="bi bi-grid-3x3-gap-fill me-2"></i>Jogos</a></li>
+        <li class="nav-item"><a class="nav-link <?= $activeNav === 'matamata' ? 'active' : '' ?>" href="/mata-mata.php"><i class="bi bi-diagram-3-fill me-2"></i>Mata-mata</a></li>
+        <li class="nav-item"><a class="nav-link <?= $activeNav === 'lancar' ? 'active' : '' ?>" href="/lancar.php"><i class="bi bi-pencil-square me-2"></i>Lançar resultado</a></li>
+        <li class="nav-item ms-lg-2 mt-2 mt-lg-0"><a class="nav-link btn-admin-nav d-inline-block" href="/admin/"><i class="bi bi-lock-fill me-2"></i>Admin</a></li>
       </ul>
     </div>
   </div>

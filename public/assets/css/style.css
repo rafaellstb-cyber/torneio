@@ -65,6 +65,13 @@ h1, h2, h3, h4, h5, .titulo-condensado, .placar-grande, .stat-numero {
 .navbar-torneio .nav-link {
     color: rgba(255,255,255,.85) !important;
     font-weight: 500;
+    white-space: nowrap;
+}
+/* Entre o breakpoint lg (992px) e xl, o container fica estreito demais para
+   caber logo + 6 itens com ícone sem apertar — dá prioridade ao menu. */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    .navbar-torneio .navbar-brand span { max-width: 180px; }
+    .navbar-torneio .navbar-nav .nav-link { padding-left: .55rem; padding-right: .55rem; font-size: .92rem; }
 }
 .navbar-torneio .nav-link.active {
     color: #fff !important;
@@ -82,7 +89,7 @@ h1, h2, h3, h4, h5, .titulo-condensado, .placar-grande, .stat-numero {
 .hero-torneio {
     background: linear-gradient(135deg, var(--navy-1), var(--navy-2));
     color: #fff;
-    border-radius: 0 0 1.25rem 1.25rem;
+    border-radius: 1.25rem;
     padding: 1.75rem 1rem 2rem;
     margin-bottom: 1.5rem;
 }
@@ -219,19 +226,52 @@ h1, h2, h3, h4, h5, .titulo-condensado, .placar-grande, .stat-numero {
 
 /* ---------- Pódio ---------- */
 .podio-card { border-radius: .9rem; text-align: center; padding: 1.25rem 1rem; }
-.podio-campeao { background: linear-gradient(160deg, #fff8e1, #ffe9a8); border: 2px solid var(--ouro); order: 2; }
-.podio-vice { background: #f4f5f7; border: 2px solid var(--prata); order: 1; }
-.podio-terceiro { background: #fbeee2; border: 2px solid var(--bronze); order: 3; }
+.podio-card .podio-titulo {
+    font-size: .78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    color: #6c757d;
+    margin-bottom: .1rem;
+}
+.podio-campeao { background: linear-gradient(160deg, #ffe9a8, #ffc93d); border: 2px solid var(--ouro); }
+.podio-campeao .podio-titulo { color: #8a6400; }
+.podio-vice { background: #f4f5f7; border: 2px solid var(--prata); }
+.podio-terceiro { background: #fbeee2; border: 2px solid var(--bronze); }
 .podio-medalha { font-size: 2.4rem; }
-.podio-flex { display: flex; flex-wrap: wrap; gap: .75rem; align-items: flex-end; }
-.podio-flex > div { flex: 1 1 30%; }
+.podio-campeao .podio-medalha { font-size: 3rem; }
+
+.podio-flex {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "campeao campeao" "vice terceiro";
+    gap: .75rem;
+}
+.podio-campeao { grid-area: campeao; }
+.podio-vice { grid-area: vice; }
+.podio-terceiro { grid-area: terceiro; }
+
+@media (min-width: 576px) {
+    .podio-flex {
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-areas: "vice campeao terceiro";
+        align-items: end;
+    }
+}
 
 /* ---------- Chaveamento mata-mata ---------- */
 .chave-scroll { overflow-x: auto; padding-bottom: .5rem; }
 .chave-colunas { display: flex; gap: 1.25rem; min-width: 780px; }
 .chave-coluna { flex: 1; display: flex; flex-direction: column; justify-content: space-around; gap: 1rem; }
-.chave-coluna h6 { text-align: center; text-transform: uppercase; font-size: .78rem; color: #6c757d; letter-spacing: .05em; }
-.chave-jogo { background: #fff; border: 1px solid #e9ecef; border-radius: .6rem; overflow: visible; position: relative; }
+.chave-coluna h6 { text-align: center; text-transform: uppercase; font-size: .78rem; color: var(--navy-2); font-weight: 700; letter-spacing: .05em; }
+.chave-jogo {
+    background: linear-gradient(180deg, rgba(20,107,129,.07), rgba(20,107,129,0) 40%), #fff;
+    border: 1px solid #e9ecef;
+    border-left: 4px solid var(--navy-2);
+    border-radius: .6rem;
+    overflow: visible;
+    position: relative;
+}
 .chave-coluna:not(:first-child) .chave-jogo::before {
     content: '';
     position: absolute;

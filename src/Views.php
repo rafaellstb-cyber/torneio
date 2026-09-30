@@ -116,21 +116,21 @@ final class Views
         ob_start();
         ?>
         <div class="podio-flex mb-4">
-            <div class="podio-card podio-vice">
-                <div class="podio-medalha">🥈</div>
-                <p class="text-muted small mb-0">Vice-campeão</p>
-                <p class="h5 mb-0"><?= e($podio['vice']['nome']) ?></p>
-                <?php if (self::atletas($podio['vice']) !== ''): ?><span class="atletas-podio"><?= e(self::atletas($podio['vice'])) ?></span><?php endif; ?>
-            </div>
             <div class="podio-card podio-campeao">
-                <div class="podio-medalha">🥇</div>
-                <p class="text-muted small mb-0">Campeão</p>
+                <div class="podio-medalha">🏆</div>
+                <p class="podio-titulo mb-0">Campeão</p>
                 <p class="h3 mb-0"><?= e($podio['campeao']['nome']) ?></p>
                 <?php if (self::atletas($podio['campeao']) !== ''): ?><span class="atletas-podio"><?= e(self::atletas($podio['campeao'])) ?></span><?php endif; ?>
             </div>
+            <div class="podio-card podio-vice">
+                <div class="podio-medalha">🥈</div>
+                <p class="podio-titulo mb-0">Vice-campeão</p>
+                <p class="h5 mb-0"><?= e($podio['vice']['nome']) ?></p>
+                <?php if (self::atletas($podio['vice']) !== ''): ?><span class="atletas-podio"><?= e(self::atletas($podio['vice'])) ?></span><?php endif; ?>
+            </div>
             <div class="podio-card podio-terceiro">
                 <div class="podio-medalha">🥉</div>
-                <p class="text-muted small mb-0">3º lugar</p>
+                <p class="podio-titulo mb-0">3º lugar</p>
                 <p class="h5 mb-0"><?= e($podio['terceiro']['nome']) ?></p>
                 <?php if (self::atletas($podio['terceiro']) !== ''): ?><span class="atletas-podio"><?= e(self::atletas($podio['terceiro'])) ?></span><?php endif; ?>
             </div>
