@@ -200,6 +200,12 @@ h1, h2, h3, h4, h5, .titulo-condensado, .placar-grande, .stat-numero {
     color: #6c757d;
     display: block;
 }
+.atletas-podio {
+    font-size: .74rem;
+    font-weight: 300;
+    color: #6c757d;
+    display: block;
+}
 .placar-grande { font-size: 1.9rem; font-weight: 700; line-height: 1; }
 .icone-trofeu { color: var(--verde-txt); margin-left: .4rem; }
 

@@ -105,23 +105,7 @@ ob_start();
 
 <?php if ($podio): ?>
 <h2 class="h5 mb-3">Pódio</h2>
-<div class="podio-flex mb-4">
-  <div class="podio-card podio-vice">
-    <div class="podio-medalha">🥈</div>
-    <p class="text-muted small mb-0">Vice-campeão</p>
-    <p class="h5 mb-0"><?= e($podio['vice']['nome']) ?></p>
-  </div>
-  <div class="podio-card podio-campeao">
-    <div class="podio-medalha">🥇</div>
-    <p class="text-muted small mb-0">Campeão</p>
-    <p class="h3 mb-0"><?= e($podio['campeao']['nome']) ?></p>
-  </div>
-  <div class="podio-card podio-terceiro">
-    <div class="podio-medalha">🥉</div>
-    <p class="text-muted small mb-0">3º lugar</p>
-    <p class="h5 mb-0"><?= e($podio['terceiro']['nome']) ?></p>
-  </div>
-</div>
+<?= Views::podioHtml($podio) ?>
 <?php endif; ?>
 
 <div class="row g-4">

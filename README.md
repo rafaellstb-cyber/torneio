@@ -50,11 +50,15 @@ php scripts/criar_admin.php meu_usuario minha_senha_forte
    possível.
 3. Garanta que a pasta `database/` tenha permissão de escrita (o SQLite é criado automaticamente
    no primeiro acesso).
-4. Rode uma vez, via SSH ou por um script temporário, `php scripts/seed.php` para popular o
-   banco. Se não tiver acesso SSH, crie um admin acessando `scripts/criar_admin.php` uma única
-   vez por linha de comando (a maioria das hospedagens compartilhadas oferece PHP CLI via SSH ou
-   painel), ou adapte a seção "Configuração inicial" abaixo.
-5. Acesse `/admin/` e ajuste nome do torneio, data, local e horário em **Torneio**.
+4. Popule o banco (times, calendário e o primeiro admin). Duas opções:
+   - **Com acesso SSH/CLI:** `php scripts/seed.php` (veja acima).
+   - **Sem SSH** (a maioria das hospedagens gratuitas): acesse `https://seu-dominio/instalar.php`
+     pelo navegador. É um formulário único que pede os dados do torneio e cria o primeiro
+     usuário admin com a senha que você escolher. Só funciona uma vez — depois que os times
+     existem, a página se desativa sozinha. **Apague o arquivo `public/instalar.php` do
+     servidor assim que terminar**, por segurança (mesmo desativada, é uma página a menos
+     exposta publicamente).
+5. Acesse `/admin/` e ajuste nome do torneio, data, local e horário em **Torneio**, se precisar.
 
 ### Usando MySQL em vez de SQLite
 
