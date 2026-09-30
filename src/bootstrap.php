@@ -26,3 +26,14 @@ function e(?string $value): string
 {
     return htmlspecialchars($value ?? '', ENT_QUOTES, 'UTF-8');
 }
+
+/**
+ * Data de modificação de um arquivo em /public, usada como query string de
+ * cache-busting (ex.: style.css?v=173...) para que o navegador baixe a
+ * versão nova assim que o arquivo mudar, sem precisar limpar o cache.
+ */
+function asset_v(string $publicRelativePath): string
+{
+    $full = __DIR__ . '/../public/' . ltrim($publicRelativePath, '/');
+    return file_exists($full) ? (string) filemtime($full) : '1';
+}
