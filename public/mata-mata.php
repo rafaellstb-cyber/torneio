@@ -15,12 +15,12 @@ $terceiro = $gerado ? Jogos::porNumero(25) : null;
 
 ob_start();
 ?>
-
 <h1 class="h4 mb-2">Mata-mata</h1>
-<?= Views::indicadorAtualizacao() ?>
+<?php
+$cabecalho = ob_get_clean();
 
-<div data-autorefresh id="conteudo-auto">
-
+ob_start();
+?>
 <?php if (!$gerado): ?>
   <p class="text-muted">O mata-mata ainda não foi gerado. Ele será montado automaticamente com os 8 melhores times assim que a fase classificatória terminar.</p>
 <?php else: ?>
@@ -71,19 +71,19 @@ ob_start();
   </div>
 
 <?php endif; ?>
-</div>
-
 <?php
-$conteudo = ob_get_clean();
+$conteudoAuto = ob_get_clean();
 
 if (isset($_GET['_frag'])) {
     header('Content-Type: text/html; charset=utf-8');
-    echo $conteudo;
+    echo $conteudoAuto;
     exit;
 }
 
 $pageTitle = 'Mata-mata';
 $activeNav = 'matamata';
 require __DIR__ . '/../src/views/header.php';
-echo $conteudo;
+echo $cabecalho;
+echo Views::indicadorAtualizacao();
+echo '<div data-autorefresh id="conteudo-auto">' . $conteudoAuto . '</div>';
 require __DIR__ . '/../src/views/footer.php';

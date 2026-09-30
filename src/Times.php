@@ -31,9 +31,9 @@ final class Times
         if ($existentes > 0) {
             return;
         }
-        $stmt = $pdo->prepare('INSERT INTO times (codigo, nome) VALUES (?, ?)');
+        $stmt = $pdo->prepare('INSERT INTO times (codigo, nome, atletas) VALUES (?, ?, ?)');
         for ($i = 1; $i <= 9; $i++) {
-            $stmt->execute(['T' . $i, 'Time ' . $i]);
+            $stmt->execute(['T' . $i, 'Time ' . $i, 'Atleta #1, Atleta #2']);
         }
     }
 

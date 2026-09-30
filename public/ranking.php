@@ -9,17 +9,17 @@ $ranking = Ranking::calcular();
 
 ob_start();
 ?>
-
 <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-2">
   <div>
     <h1 class="h4 mb-1">Classificação geral</h1>
     <p class="text-muted small mb-0">Classificatória: <?= $classCount['encerrados'] ?>/<?= $classCount['total'] ?: 18 ?> jogos<?= $classCount['encerrados'] < ($classCount['total'] ?: 18) ? ' · tabela parcial' : '' ?></p>
   </div>
 </div>
-<?= Views::indicadorAtualizacao() ?>
+<?php
+$cabecalho = ob_get_clean();
 
-<div data-autorefresh id="conteudo-auto">
-
+ob_start();
+?>
 <?php if ($ranking['tem_empate_pendente']): ?>
   <p class="text-muted small"><i class="bi bi-info-circle me-1"></i>Há empate pendente entre times que ainda não tiveram a ordem definida. O administrador precisa resolver o desempate.</p>
 <?php endif; ?>
@@ -38,6 +38,7 @@ ob_start();
         <td>
           <?= e($linha['nome']) ?>
           <?php if ($linha['pendente']): ?><span class="badge badge-pendente ms-1">empate pendente</span><?php endif; ?>
+          <?php if (!empty($linha['atletas'])): ?><span class="atletas-tabela"><?= e($linha['atletas']) ?></span><?php endif; ?>
         </td>
         <td><?= $linha['j'] ?></td>
         <td><?= $linha['v'] ?></td>
@@ -56,21 +57,20 @@ ob_start();
   </table>
 </div>
 
-</div>
-
 <p class="text-muted small mt-3">Desempate: vitórias &gt; saldo de pontos &gt; pontos pró &gt; confronto direto.</p>
-
 <?php
-$conteudo = ob_get_clean();
+$conteudoAuto = ob_get_clean();
 
 if (isset($_GET['_frag'])) {
     header('Content-Type: text/html; charset=utf-8');
-    echo $conteudo;
+    echo $conteudoAuto;
     exit;
 }
 
 $pageTitle = 'Ranking';
 $activeNav = 'ranking';
 require __DIR__ . '/../src/views/header.php';
-echo $conteudo;
+echo $cabecalho;
+echo Views::indicadorAtualizacao();
+echo '<div data-autorefresh id="conteudo-auto">' . $conteudoAuto . '</div>';
 require __DIR__ . '/../src/views/footer.php';

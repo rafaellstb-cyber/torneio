@@ -1,9 +1,11 @@
 </main>
 
 <footer class="text-center text-muted small py-4 mt-3">
-  <p class="mb-1"><?= e(Settings::rodapeTexto()) ?></p>
+  <?php $rodapeTexto = trim(Settings::rodapeTexto()); ?>
+  <?php if ($rodapeTexto !== ''): ?>
+    <p class="mb-1"><?= e($rodapeTexto) ?></p>
+  <?php endif; ?>
   <p class="mb-0">
-    1 set de 21 pontos · diferença mínima de 2 ·
     <a href="/admin/">área administrativa</a>
   </p>
 </footer>

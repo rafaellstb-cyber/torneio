@@ -19,6 +19,7 @@ final class Ranking
                 'id' => $id,
                 'codigo' => $t['codigo'],
                 'nome' => $t['nome'],
+                'atletas' => $t['atletas'],
                 'j' => 0, 'v' => 0, 'd' => 0, 'pp' => 0, 'pc' => 0, 'sp' => 0,
                 'desempate_manual' => $t['desempate_manual'],
             ];

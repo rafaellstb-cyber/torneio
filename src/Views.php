@@ -43,6 +43,11 @@ final class Views
         return $time ? $time['nome'] : 'A definir';
     }
 
+    private static function atletas(?array $time): string
+    {
+        return $time && !empty($time['atletas']) ? trim($time['atletas']) : '';
+    }
+
     /** Renderiza o card padrão de um jogo (usado em Início, Jogos e listas). */
     public static function cardJogo(array $jogo, array $timesMap): string
     {
@@ -72,6 +77,7 @@ final class Views
             <div class="jogo-bloco-time <?= $classeT1 ?>">
                 <div>
                     <span class="nome-time"><?= e(self::nomeTime($t1)) ?></span>
+                    <?php if (self::atletas($t1) !== ''): ?><span class="atletas-time"><?= e(self::atletas($t1)) ?></span><?php endif; ?>
                     <?php if ($origem1): ?><span class="origem-time"><?= e($origem1) ?></span><?php endif; ?>
                 </div>
                 <span class="placar-grande"><?= $encerrado ? (int) $jogo['pontos1'] : '–' ?><?= $venceT1 ? ' <i class="bi bi-trophy-fill icone-trofeu"></i>' : '' ?></span>
@@ -79,6 +85,7 @@ final class Views
             <div class="jogo-bloco-time <?= $classeT2 ?>">
                 <div>
                     <span class="nome-time"><?= e(self::nomeTime($t2)) ?></span>
+                    <?php if (self::atletas($t2) !== ''): ?><span class="atletas-time"><?= e(self::atletas($t2)) ?></span><?php endif; ?>
                     <?php if ($origem2): ?><span class="origem-time"><?= e($origem2) ?></span><?php endif; ?>
                 </div>
                 <span class="placar-grande"><?= $encerrado ? (int) $jogo['pontos2'] : '–' ?><?= $venceT2 ? ' <i class="bi bi-trophy-fill icone-trofeu"></i>' : '' ?></span>
@@ -117,11 +124,17 @@ final class Views
         <div class="chave-jogo">
             <div class="cabecalho-chave">Jogo <?= (int) $jogo['numero'] ?> · <?= e($jogo['rotulo_slot'] ?? '') ?> · Quadra <?= (int) $jogo['quadra'] ?></div>
             <div class="linha-time <?= $venceT1 ? 'vencedor' : ($venceT2 ? 'perdedor' : '') ?>">
-                <span><?= e(self::nomeTime($t1)) ?><?php if (!$t1 && !empty($jogo['origem1'])): ?><br><small class="text-muted"><?= e($jogo['origem1']) ?></small><?php endif; ?></span>
+                <span>
+                    <strong><?= e(self::nomeTime($t1)) ?></strong><?php if (self::atletas($t1) !== ''): ?><span class="atletas-chave"><?= e(self::atletas($t1)) ?></span><?php endif; ?>
+                    <?php if (!$t1 && !empty($jogo['origem1'])): ?><br><small class="text-muted"><?= e($jogo['origem1']) ?></small><?php endif; ?>
+                </span>
                 <span><?= $encerrado ? (int) $jogo['pontos1'] : '' ?></span>
             </div>
             <div class="linha-time <?= $venceT2 ? 'vencedor' : ($venceT1 ? 'perdedor' : '') ?>">
-                <span><?= e(self::nomeTime($t2)) ?><?php if (!$t2 && !empty($jogo['origem2'])): ?><br><small class="text-muted"><?= e($jogo['origem2']) ?></small><?php endif; ?></span>
+                <span>
+                    <strong><?= e(self::nomeTime($t2)) ?></strong><?php if (self::atletas($t2) !== ''): ?><span class="atletas-chave"><?= e(self::atletas($t2)) ?></span><?php endif; ?>
+                    <?php if (!$t2 && !empty($jogo['origem2'])): ?><br><small class="text-muted"><?= e($jogo['origem2']) ?></small><?php endif; ?>
+                </span>
                 <span><?= $encerrado ? (int) $jogo['pontos2'] : '' ?></span>
             </div>
         </div>

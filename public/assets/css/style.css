@@ -1,7 +1,9 @@
 :root {
-    /* Paleta baseada na logo do #3 Torneio Entre Amigos: azul-petróleo, laranja e amarelo-sol */
-    --navy-1: #0c3a49;
-    --navy-2: #146b81;
+    /* Paleta baseada na logo do #3 Torneio Entre Amigos: azul, laranja e amarelo-sol.
+       Azul propositalmente mais claro e "puro" (menos esverdeado) que a tinta
+       azul-petróleo da logo, para não se confundir com ela no cabeçalho. */
+    --navy-1: #1a5f96;
+    --navy-2: #2f8fd1;
     --accent: #f2661e;
     --accent-2: #ffc93d;
     --verde-bg: #d9f2df;
@@ -182,6 +184,24 @@ h1, h2, h3, h4, h5, .titulo-condensado, .placar-grande, .stat-numero {
 .jogo-bloco-time.perdedor { background: var(--vermelho-bg); }
 .jogo-bloco-time .nome-time { font-weight: 600; }
 .jogo-bloco-time .origem-time { font-size: .75rem; color: #6c757d; display: block; }
+.atletas-time {
+    font-size: .74rem;
+    font-weight: 300;
+    color: #6c757d;
+    display: block;
+}
+.atletas-chave {
+    font-size: .7rem;
+    font-weight: 300;
+    color: #6c757d;
+    margin-left: .35rem;
+}
+.atletas-tabela {
+    font-size: .74rem;
+    font-weight: 300;
+    color: #6c757d;
+    display: block;
+}
 .placar-grande { font-size: 1.9rem; font-weight: 700; line-height: 1; }
 .icone-trofeu { color: var(--verde-txt); margin-left: .4rem; }
 

@@ -37,9 +37,10 @@ $ultimosResultados = array_slice($encerrados, 0, 5);
 $ranking = Ranking::calcular();
 $rankingResumo = array_slice($ranking['linhas'], 0, 5);
 
+// Cabeçalho estático: renderizado uma vez, nunca substituído pelo auto-refresh
+// (o indicador guarda referências de DOM que ficariam órfãs se fosse recriado a cada 15s).
 ob_start();
 ?>
-
 <section class="hero-torneio">
   <div class="d-flex flex-wrap justify-content-between align-items-start gap-2">
     <div class="d-flex align-items-center gap-3">
@@ -67,11 +68,12 @@ ob_start();
     </div>
   </div>
 </section>
+<?php
+$cabecalho = ob_get_clean();
 
-<?= Views::indicadorAtualizacao() ?>
-
-<div data-autorefresh id="conteudo-auto">
-
+// Conteúdo dinâmico: isto (e só isto) é o que o fetch de 15s devolve e substitui.
+ob_start();
+?>
 <h2 class="h5 mb-3">Agora nas quadras</h2>
 <?php if ($folgaAtual): ?>
   <p class="text-muted small">Rodada <?= e((string) $rodadaAtual) ?> da classificatória · Folgam: <?= e(implode(', ', $folgaAtual)) ?></p>
@@ -148,7 +150,10 @@ ob_start();
         <?php foreach ($rankingResumo as $linha): ?>
           <tr class="<?= $linha['posicao'] <= 8 ? 'linha-classificada' : 'linha-eliminada' ?>">
             <td><?= $linha['posicao'] ?></td>
-            <td><?= e($linha['nome']) ?><?= $linha['pendente'] ? ' <span class="badge badge-pendente">empate pendente</span>' : '' ?></td>
+            <td>
+              <?= e($linha['nome']) ?><?= $linha['pendente'] ? ' <span class="badge badge-pendente">empate pendente</span>' : '' ?>
+              <?php if (!empty($linha['atletas'])): ?><span class="atletas-tabela"><?= e($linha['atletas']) ?></span><?php endif; ?>
+            </td>
             <td><?= $linha['v'] ?></td>
             <td><?= $linha['d'] ?></td>
             <td class="<?= $linha['sp'] > 0 ? 'saldo-positivo' : ($linha['sp'] < 0 ? 'saldo-negativo' : '') ?>"><?= $linha['sp'] > 0 ? '+' : '' ?><?= $linha['sp'] ?></td>
@@ -159,19 +164,19 @@ ob_start();
     </div>
   </div>
 </div>
-
-</div>
 <?php
-$conteudo = ob_get_clean();
+$conteudoAuto = ob_get_clean();
 
 if (isset($_GET['_frag'])) {
     header('Content-Type: text/html; charset=utf-8');
-    echo $conteudo;
+    echo $conteudoAuto;
     exit;
 }
 
 $pageTitle = 'Início';
 $activeNav = 'inicio';
 require __DIR__ . '/../src/views/header.php';
-echo $conteudo;
+echo $cabecalho;
+echo Views::indicadorAtualizacao();
+echo '<div data-autorefresh id="conteudo-auto">' . $conteudoAuto . '</div>';
 require __DIR__ . '/../src/views/footer.php';

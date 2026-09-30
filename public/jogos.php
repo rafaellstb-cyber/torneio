@@ -41,11 +41,9 @@ foreach ($jogos as $jogo) {
 
 ob_start();
 ?>
-
 <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-2">
   <h1 class="h4 mb-0"><?= count($jogos) ?> jogo<?= count($jogos) === 1 ? '' : 's' ?></h1>
 </div>
-<?= Views::indicadorAtualizacao() ?>
 
 <form method="get" class="card p-3 mb-3 shadow-sm" id="form-filtros">
   <div class="row g-2">
@@ -96,8 +94,11 @@ ob_start();
     <button type="button" class="btn btn-sm btn-link px-0" data-limpar-filtros>Limpar filtros</button>
   </div>
 </form>
+<?php
+$cabecalho = ob_get_clean();
 
-<div data-autorefresh id="conteudo-auto">
+ob_start();
+?>
 <?php if (!$secoes): ?>
   <p class="text-muted">Nenhum jogo encontrado com os filtros selecionados.</p>
 <?php endif; ?>
@@ -113,19 +114,19 @@ ob_start();
     <?php endforeach; ?>
   </div>
 <?php endforeach; ?>
-</div>
-
 <?php
-$conteudo = ob_get_clean();
+$conteudoAuto = ob_get_clean();
 
 if (isset($_GET['_frag'])) {
     header('Content-Type: text/html; charset=utf-8');
-    echo $conteudo;
+    echo $conteudoAuto;
     exit;
 }
 
 $pageTitle = 'Jogos';
 $activeNav = 'jogos';
 require __DIR__ . '/../src/views/header.php';
-echo $conteudo;
+echo $cabecalho;
+echo Views::indicadorAtualizacao();
+echo '<div data-autorefresh id="conteudo-auto">' . $conteudoAuto . '</div>';
 require __DIR__ . '/../src/views/footer.php';
