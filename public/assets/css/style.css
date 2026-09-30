@@ -220,9 +220,13 @@ h1, h2, h3, h4, h5, .titulo-condensado, .placar-grande, .stat-numero {
 .tabela-ranking td, .tabela-ranking th { vertical-align: middle; }
 .linha-classificada { background: var(--verde-bg) !important; }
 .linha-eliminada { opacity: .65; }
-.linha-corte { border-top: 2px dashed #adb5bd !important; }
-.saldo-positivo { color: var(--verde-txt); font-weight: 600; }
-.saldo-negativo { color: var(--vermelho-txt); font-weight: 600; }
+.linha-corte { border-top: 2px dashed var(--verde-txt) !important; }
+.saldo-positivo { color: var(--verde-txt); font-weight: 700; }
+.saldo-negativo { color: var(--vermelho-txt); font-weight: 700; }
+.posicao-classificada { color: var(--verde-txt); font-weight: 700; }
+.nome-ranking { font-weight: 700; }
+.vitorias-ranking { color: var(--verde-txt); font-weight: 700; }
+.legenda-ranking { line-height: 1.6; }
 
 /* ---------- Pódio ---------- */
 .podio-card { border-radius: .9rem; text-align: center; padding: 1.25rem 1rem; }

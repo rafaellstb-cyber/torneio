@@ -11,7 +11,7 @@ ob_start();
 ?>
 <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-2">
   <div>
-    <h1 class="h4 mb-1">Classificação geral</h1>
+    <h1 class="h4 mb-1">Ranking Geral</h1>
     <p class="text-muted small mb-0">Classificatória: <?= $classCount['encerrados'] ?>/<?= $classCount['total'] ?: 18 ?> jogos<?= $classCount['encerrados'] < ($classCount['total'] ?: 18) ? ' · tabela parcial' : '' ?></p>
   </div>
 </div>
@@ -28,36 +28,35 @@ ob_start();
   <table class="table tabela-ranking bg-white shadow-sm align-middle">
     <thead class="table-light">
       <tr>
-        <th>#</th><th>Time</th><th>J</th><th>V</th><th>D</th><th>PP</th><th>PC</th><th>SP</th><th>Situação</th>
+        <th>#</th><th>Time</th><th>J</th><th>V</th><th>PP</th><th>PC</th><th>SP</th>
       </tr>
     </thead>
     <tbody>
     <?php foreach ($ranking['linhas'] as $linha): ?>
-      <tr class="<?= $linha['posicao'] <= 8 ? 'linha-classificada' : 'linha-eliminada' ?><?= $linha['posicao'] === 9 ? ' linha-corte' : '' ?>">
-        <td><?= $linha['posicao'] ?></td>
+      <?php $classificado = $linha['posicao'] <= 8; ?>
+      <tr class="<?= $classificado ? 'linha-classificada' : 'linha-eliminada' ?><?= $linha['posicao'] === 9 ? ' linha-corte' : '' ?>">
+        <td class="<?= $classificado ? 'posicao-classificada' : '' ?>"><?= $linha['posicao'] ?>º</td>
         <td>
-          <?= e($linha['nome']) ?>
+          <span class="nome-ranking"><?= e($linha['nome']) ?></span>
           <?php if ($linha['pendente']): ?><span class="badge badge-pendente ms-1">empate pendente</span><?php endif; ?>
           <?php if (!empty($linha['atletas'])): ?><span class="atletas-tabela"><?= e($linha['atletas']) ?></span><?php endif; ?>
         </td>
         <td><?= $linha['j'] ?></td>
-        <td><?= $linha['v'] ?></td>
-        <td><?= $linha['d'] ?></td>
+        <td class="vitorias-ranking"><?= $linha['v'] ?></td>
         <td><?= $linha['pp'] ?></td>
         <td><?= $linha['pc'] ?></td>
         <td class="<?= $linha['sp'] > 0 ? 'saldo-positivo' : ($linha['sp'] < 0 ? 'saldo-negativo' : '') ?>"><?= $linha['sp'] > 0 ? '+' : '' ?><?= $linha['sp'] ?></td>
-        <td>
-          <?= $linha['posicao'] <= 8
-              ? '<span class="badge badge-classificado">Classificado</span>'
-              : '<span class="badge badge-eliminado">Eliminado</span>' ?>
-        </td>
       </tr>
     <?php endforeach; ?>
     </tbody>
   </table>
 </div>
 
-<p class="text-muted small mt-3">Desempate: vitórias &gt; saldo de pontos &gt; pontos pró &gt; confronto direto.</p>
+<div class="legenda-ranking text-muted small mt-3">
+  <strong>J</strong> = jogos · <strong>V</strong> = vitórias · <strong>PP</strong> = pontos pró ·
+  <strong>PC</strong> = pontos contra · <strong>SP</strong> = saldo de pontos (PP − PC)
+</div>
+<p class="text-muted small mt-1">Desempate: vitórias &gt; saldo de pontos &gt; pontos pró &gt; confronto direto.</p>
 <?php
 $conteudoAuto = ob_get_clean();
 
