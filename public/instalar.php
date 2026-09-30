@@ -25,7 +25,6 @@ if (!$jaInstalado && $_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = (string) ($_POST['data'] ?? '');
     $local = trim((string) ($_POST['local'] ?? ''));
     $horaInicio = (string) ($_POST['hora_inicio'] ?? '14:00');
-    $duracaoRodada = max(1, (int) ($_POST['duracao_rodada_min'] ?? 30));
     $adminUsuario = trim((string) ($_POST['admin_usuario'] ?? ''));
     $adminSenha = (string) ($_POST['admin_senha'] ?? '');
     $adminSenha2 = (string) ($_POST['admin_senha2'] ?? '');
@@ -42,12 +41,10 @@ if (!$jaInstalado && $_SERVER['REQUEST_METHOD'] === 'POST') {
             'data' => $data,
             'local' => $local,
             'hora_inicio' => $horaInicio,
-            'duracao_rodada_min' => $duracaoRodada,
             'status' => 'nao_iniciado',
         ]);
         Times::cadastrarPadrao();
         Jogos::carregarCalendarioClassificatoria();
-        Horarios::recalcularTodos();
         Auth::criarAdmin($adminUsuario, $adminSenha);
         $sucesso = true;
         $jaInstalado = true;
@@ -108,10 +105,6 @@ $torneio = Torneio::get();
       <div class="mb-2">
         <label class="form-label small">Local</label>
         <input type="text" name="local" class="form-control" required value="<?= e($_POST['local'] ?? '') ?>">
-      </div>
-      <div class="mb-3">
-        <label class="form-label small">Duração de cada rodada (minutos)</label>
-        <input type="number" min="1" name="duracao_rodada_min" class="form-control" required value="<?= e((string) ($_POST['duracao_rodada_min'] ?? 30)) ?>">
       </div>
       <hr>
       <div class="mb-2">

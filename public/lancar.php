@@ -131,7 +131,6 @@ ob_start();
         <span><strong>Jogo <?= (int) $jogo['numero'] ?></strong> · <?= e(Views::faseLabel($jogo['fase'], $jogo['rodada'])) ?></span>
         <span class="d-flex align-items-center gap-2">
           <?= Views::quadraBadgeHtml((int) $jogo['quadra']) ?>
-          <span><?= e($jogo['horario_previsto'] ?? '') ?></span>
         </span>
       </div>
 

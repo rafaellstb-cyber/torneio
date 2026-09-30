@@ -22,6 +22,6 @@ return [
     // Nome do cookie de sessão do admin
     'session_name' => 'torneio_admin_sess',
 
-    // Timezone usada para calcular horários previstos
+    // Timezone usada pelo sistema (datas, log de alterações etc.)
     'timezone' => 'America/Sao_Paulo',
 ];

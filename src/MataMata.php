@@ -66,31 +66,26 @@ final class MataMata
             $porPosicao[$linha['posicao']] = $linha;
         }
 
-        $torneio = Torneio::get();
         $pdo = Database::get();
         $stmt = $pdo->prepare(
-            'INSERT INTO jogos (numero, fase, rodada, quadra, horario_previsto, time1_id, time2_id, rotulo_slot, origem1, origem2, status)
-             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
+            'INSERT INTO jogos (numero, fase, rodada, quadra, time1_id, time2_id, rotulo_slot, origem1, origem2, status)
+             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
         );
 
         foreach (self::CONFRONTOS_QUARTAS as $c) {
             $tA = $porPosicao[$c['posA']];
             $tB = $porPosicao[$c['posB']];
-            $horario = Horarios::horarioPrevisto('quartas', $c['rodada'], $torneio['hora_inicio'], (int) $torneio['duracao_rodada_min']);
             $stmt->execute([
-                $c['numero'], 'quartas', $c['rodada'], $c['quadra'], $horario,
+                $c['numero'], 'quartas', $c['rodada'], $c['quadra'],
                 $tA['id'], $tB['id'], $c['rotulo'],
                 $c['posA'] . 'º geral', $c['posB'] . 'º geral', 'pendente',
             ]);
         }
 
-        $horarioSemi = Horarios::horarioPrevisto('semifinal', 'semifinal', $torneio['hora_inicio'], (int) $torneio['duracao_rodada_min']);
-        $stmt->execute([23, 'semifinal', 'semifinal', 1, $horarioSemi, null, null, 'Semifinal 1', 'Vencedor Q1', 'Vencedor Q4', 'pendente']);
-        $stmt->execute([24, 'semifinal', 'semifinal', 2, $horarioSemi, null, null, 'Semifinal 2', 'Vencedor Q2', 'Vencedor Q3', 'pendente']);
-
-        $horarioFinal = Horarios::horarioPrevisto('final', 'final', $torneio['hora_inicio'], (int) $torneio['duracao_rodada_min']);
-        $stmt->execute([25, 'terceiro_lugar', 'final', 2, $horarioFinal, null, null, 'Disputa de 3º lugar', 'Perdedor Semifinal 1', 'Perdedor Semifinal 2', 'pendente']);
-        $stmt->execute([26, 'final', 'final', 1, $horarioFinal, null, null, 'Grande Final', 'Vencedor Semifinal 1', 'Vencedor Semifinal 2', 'pendente']);
+        $stmt->execute([23, 'semifinal', 'semifinal', 1, null, null, 'Semifinal 1', 'Vencedor Q1', 'Vencedor Q4', 'pendente']);
+        $stmt->execute([24, 'semifinal', 'semifinal', 2, null, null, 'Semifinal 2', 'Vencedor Q2', 'Vencedor Q3', 'pendente']);
+        $stmt->execute([25, 'terceiro_lugar', 'final', 2, null, null, 'Disputa de 3º lugar', 'Perdedor Semifinal 1', 'Perdedor Semifinal 2', 'pendente']);
+        $stmt->execute([26, 'final', 'final', 1, null, null, 'Grande Final', 'Vencedor Semifinal 1', 'Vencedor Semifinal 2', 'pendente']);
 
         return null;
     }

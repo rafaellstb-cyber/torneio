@@ -70,7 +70,6 @@ final class Views
                 <span><strong>Jogo <?= (int) $jogo['numero'] ?></strong> · <?= e(self::faseLabel($jogo['fase'], $jogo['rodada'])) ?></span>
                 <span class="d-flex align-items-center gap-2">
                     <?= self::quadraBadgeHtml((int) $jogo['quadra']) ?>
-                    <span><?= e($jogo['horario_previsto'] ?? '--:--') ?></span>
                     <?= self::statusBadgeHtml($jogo['status']) ?>
                 </span>
             </div>

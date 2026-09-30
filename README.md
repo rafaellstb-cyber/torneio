@@ -79,9 +79,13 @@ As tabelas são criadas automaticamente no primeiro acesso (`database/schema_mys
 
 ## Configurando os parâmetros do torneio
 
-Tudo fica em **Admin → Torneio**: nome, data, local, horário de início e duração de cada
-rodada (usada para calcular os horários previstos dos jogos). Nada disso é fixado no código —
-os valores "NOME DO MEU TORNEIO" / "NOME DO LOCAL" no seed são apenas placeholders iniciais.
+Tudo fica em **Admin → Torneio**: nome, data, local e horário de início. Nada disso é fixado
+no código — os valores "3º Torneio Entre Amigos" / "NOME DO LOCAL" no seed são apenas
+placeholders iniciais.
+
+O site não calcula nem mostra horário previsto por jogo/rodada — a duração real de cada
+partida varia demais na prática, então os jogos são organizados pela ordem e pela fila de
+cada quadra ("Agora nas quadras" na Início), não por um horário marcado.
 
 Em **Admin → Times** você renomeia os 9 times (T1–T9) e, opcionalmente, cadastra os atletas de
 cada um (texto livre).

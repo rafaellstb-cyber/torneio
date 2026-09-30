@@ -8,10 +8,10 @@ final class Torneio
         $row = $pdo->query('SELECT * FROM torneio ORDER BY id LIMIT 1')->fetch();
         if (!$row) {
             $stmt = $pdo->prepare(
-                'INSERT INTO torneio (nome, data, local, hora_inicio, duracao_rodada_min, status)
-                 VALUES (?, ?, ?, ?, ?, ?)'
+                'INSERT INTO torneio (nome, data, local, hora_inicio, status)
+                 VALUES (?, ?, ?, ?, ?)'
             );
-            $stmt->execute(['3º Torneio Entre Amigos', date('Y-m-d'), 'NOME DO LOCAL', '14:00', 30, 'nao_iniciado']);
+            $stmt->execute(['3º Torneio Entre Amigos', date('Y-m-d'), 'NOME DO LOCAL', '14:00', 'nao_iniciado']);
             $row = $pdo->query('SELECT * FROM torneio ORDER BY id LIMIT 1')->fetch();
         }
         return $row;
@@ -20,20 +20,19 @@ final class Torneio
     public static function update(array $dados): void
     {
         $atual = self::get();
-        $campos = ['nome', 'data', 'local', 'hora_inicio', 'duracao_rodada_min', 'status'];
+        $campos = ['nome', 'data', 'local', 'hora_inicio', 'status'];
         $valores = [];
         foreach ($campos as $campo) {
             $valores[$campo] = $dados[$campo] ?? $atual[$campo];
         }
         $stmt = Database::get()->prepare(
-            'UPDATE torneio SET nome = ?, data = ?, local = ?, hora_inicio = ?, duracao_rodada_min = ?, status = ? WHERE id = ?'
+            'UPDATE torneio SET nome = ?, data = ?, local = ?, hora_inicio = ?, status = ? WHERE id = ?'
         );
         $stmt->execute([
             $valores['nome'],
             $valores['data'],
             $valores['local'],
             $valores['hora_inicio'],
-            (int) $valores['duracao_rodada_min'],
             $valores['status'],
             $atual['id'],
         ]);

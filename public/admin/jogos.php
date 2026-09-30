@@ -37,10 +37,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!$jogo) {
             $erro = 'Jogo não encontrado.';
         } else {
-            $horario = (string) $_POST['horario_previsto'];
             $quadra = (int) $_POST['quadra'];
-            if ($horario !== $jogo['horario_previsto'] || $quadra !== (int) $jogo['quadra']) {
-                Jogos::ajustarHorarioQuadra($jogoId, $horario, $quadra, $usuario);
+            if ($quadra !== (int) $jogo['quadra']) {
+                Jogos::ajustarQuadra($jogoId, $quadra, $usuario);
             }
 
             $p1 = Validacao::paraInteiro($_POST['pontos1'] ?? null);
@@ -55,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $mensagem = "Jogo {$jogo['numero']} salvo.";
                 }
             } else {
-                $mensagem = "Jogo {$jogo['numero']}: horário/quadra atualizados.";
+                $mensagem = "Jogo {$jogo['numero']}: quadra atualizada.";
             }
         }
     }
@@ -132,7 +131,7 @@ require __DIR__ . '/../../src/views/admin_header.php';
 <table class="table table-sm bg-white align-middle">
 <thead class="table-light">
 <tr>
-  <th>#</th><th>Fase</th><th>Quadra</th><th>Horário</th><th>Time 1</th><th>Time 2</th><th colspan="2">Placar</th><th>Status</th><th></th>
+  <th>#</th><th>Fase</th><th>Quadra</th><th>Time 1</th><th>Time 2</th><th colspan="2">Placar</th><th>Status</th><th></th>
 </tr>
 </thead>
 <tbody>
@@ -146,7 +145,6 @@ require __DIR__ . '/../../src/views/admin_header.php';
     <td><?= (int) $jogo['numero'] ?></td>
     <td class="small"><?= e(Views::faseLabel($jogo['fase'], $jogo['rodada'])) ?></td>
     <td><input form="<?= $formId ?>" type="number" name="quadra" value="<?= (int) $jogo['quadra'] ?>" min="1" max="3" class="form-control form-control-sm" style="width:64px"></td>
-    <td><input form="<?= $formId ?>" type="time" name="horario_previsto" value="<?= e($jogo['horario_previsto'] ?? '') ?>" class="form-control form-control-sm" style="width:110px"></td>
     <td class="small"><?= e($t1) ?></td>
     <td class="small"><?= e($t2) ?></td>
     <td><input form="<?= $formId ?>" type="number" name="pontos1" value="<?= e((string) $jogo['pontos1']) ?>" min="0" class="form-control form-control-sm" style="width:60px" <?= (!$jogo['time1_id'] || !$jogo['time2_id']) ? 'disabled' : '' ?>></td>

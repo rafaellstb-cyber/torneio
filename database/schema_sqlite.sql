@@ -4,7 +4,6 @@ CREATE TABLE IF NOT EXISTS torneio (
     data TEXT NOT NULL,
     local TEXT NOT NULL,
     hora_inicio TEXT NOT NULL,
-    duracao_rodada_min INTEGER NOT NULL DEFAULT 30,
     status TEXT NOT NULL DEFAULT 'nao_iniciado'
 );
 
@@ -22,7 +21,6 @@ CREATE TABLE IF NOT EXISTS jogos (
     fase TEXT NOT NULL,
     rodada TEXT,
     quadra INTEGER NOT NULL,
-    horario_previsto TEXT,
     time1_id INTEGER,
     time2_id INTEGER,
     rotulo_slot TEXT,

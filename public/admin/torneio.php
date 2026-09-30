@@ -17,15 +17,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'data' => (string) $_POST['data'],
             'local' => trim((string) $_POST['local']),
             'hora_inicio' => (string) $_POST['hora_inicio'],
-            'duracao_rodada_min' => max(1, (int) $_POST['duracao_rodada_min']),
             'status' => in_array($_POST['status'], ['nao_iniciado', 'em_andamento', 'finalizado'], true) ? $_POST['status'] : 'nao_iniciado',
         ];
         if ($dados['nome'] === '' || $dados['local'] === '') {
             $erro = 'Nome e local são obrigatórios.';
         } else {
             Torneio::update($dados);
-            Horarios::recalcularTodos();
-            $mensagem = 'Dados do torneio atualizados. Os horários previstos foram recalculados.';
+            $mensagem = 'Dados do torneio atualizados.';
         }
     }
 
@@ -73,10 +71,6 @@ require __DIR__ . '/../../src/views/admin_header.php';
     <div class="mb-3">
       <label class="form-label">Local</label>
       <input type="text" name="local" class="form-control" value="<?= e($torneio['local']) ?>" required>
-    </div>
-    <div class="mb-3">
-      <label class="form-label">Duração de cada rodada (minutos)</label>
-      <input type="number" min="1" name="duracao_rodada_min" class="form-control" value="<?= (int) $torneio['duracao_rodada_min'] ?>" required>
     </div>
     <div class="mb-3">
       <label class="form-label">Status</label>

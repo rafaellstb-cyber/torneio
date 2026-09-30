@@ -43,7 +43,6 @@ final class Jogos
         }
 
         $pdo = Database::get();
-        $torneio = Torneio::get();
         $codigos = Times::todos();
         $porCodigo = [];
         foreach ($codigos as $t) {
@@ -51,19 +50,17 @@ final class Jogos
         }
 
         $stmt = $pdo->prepare(
-            'INSERT INTO jogos (numero, fase, rodada, quadra, horario_previsto, time1_id, time2_id, status)
-             VALUES (?, ?, ?, ?, ?, ?, ?, ?)'
+            'INSERT INTO jogos (numero, fase, rodada, quadra, time1_id, time2_id, status)
+             VALUES (?, ?, ?, ?, ?, ?, ?)'
         );
 
         $numero = 1;
         foreach (self::CALENDARIO as $jogo) {
-            $horario = Horarios::horarioPrevisto('classificatoria', (string) $jogo['rodada'], $torneio['hora_inicio'], (int) $torneio['duracao_rodada_min']);
             $stmt->execute([
                 $numero,
                 'classificatoria',
                 (string) $jogo['rodada'],
                 $jogo['quadra'],
-                $horario,
                 $porCodigo[$jogo['t1']] ?? null,
                 $porCodigo[$jogo['t2']] ?? null,
                 'pendente',
@@ -273,15 +270,15 @@ final class Jogos
         Torneio::atualizarStatusAutomatico();
     }
 
-    public static function ajustarHorarioQuadra(int $jogoId, string $horario, int $quadra, ?string $usuario): void
+    public static function ajustarQuadra(int $jogoId, int $quadra, ?string $usuario): void
     {
         $jogo = self::porId($jogoId);
         if (!$jogo) {
             return;
         }
-        $stmt = Database::get()->prepare('UPDATE jogos SET horario_previsto = ?, quadra = ? WHERE id = ?');
-        $stmt->execute([$horario, $quadra, $jogoId]);
-        Log::registrar($jogoId, 'horario/quadra', "{$jogo['horario_previsto']} / Q{$jogo['quadra']}", "{$horario} / Q{$quadra}", $usuario);
+        $stmt = Database::get()->prepare('UPDATE jogos SET quadra = ? WHERE id = ?');
+        $stmt->execute([$quadra, $jogoId]);
+        Log::registrar($jogoId, 'quadra', "Q{$jogo['quadra']}", "Q{$quadra}", $usuario);
     }
 
     public static function excluirTodos(): void

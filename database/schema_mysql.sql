@@ -4,7 +4,6 @@ CREATE TABLE IF NOT EXISTS torneio (
     data VARCHAR(10) NOT NULL,
     local VARCHAR(200) NOT NULL,
     hora_inicio VARCHAR(5) NOT NULL,
-    duracao_rodada_min INT NOT NULL DEFAULT 30,
     status VARCHAR(20) NOT NULL DEFAULT 'nao_iniciado'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -22,7 +21,6 @@ CREATE TABLE IF NOT EXISTS jogos (
     fase VARCHAR(20) NOT NULL,
     rodada VARCHAR(20),
     quadra INT NOT NULL,
-    horario_previsto VARCHAR(5),
     time1_id INT NULL,
     time2_id INT NULL,
     rotulo_slot VARCHAR(50),
