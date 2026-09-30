@@ -21,11 +21,14 @@ final class MataMata
         ],
     ];
 
+    /**
+     * As quartas acontecem em duas levas, só nas quadras 1 e 2 (2 jogos por leva).
+     */
     private const CONFRONTOS_QUARTAS = [
         ['numero' => 19, 'quadra' => 1, 'rodada' => 'leva1', 'rotulo' => 'Q1', 'posA' => 1, 'posB' => 8],
         ['numero' => 20, 'quadra' => 2, 'rodada' => 'leva1', 'rotulo' => 'Q2', 'posA' => 2, 'posB' => 7],
-        ['numero' => 21, 'quadra' => 3, 'rodada' => 'leva1', 'rotulo' => 'Q3', 'posA' => 3, 'posB' => 6],
-        ['numero' => 22, 'quadra' => 1, 'rodada' => 'leva2', 'rotulo' => 'Q4', 'posA' => 4, 'posB' => 5],
+        ['numero' => 21, 'quadra' => 1, 'rodada' => 'leva2', 'rotulo' => 'Q3', 'posA' => 3, 'posB' => 6],
+        ['numero' => 22, 'quadra' => 2, 'rodada' => 'leva2', 'rotulo' => 'Q4', 'posA' => 4, 'posB' => 5],
     ];
 
     public static function jaGerado(): bool

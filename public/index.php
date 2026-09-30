@@ -42,12 +42,15 @@ ob_start();
 
 <section class="hero-torneio">
   <div class="d-flex flex-wrap justify-content-between align-items-start gap-2">
-    <div>
-      <h1><?= e($torneio['nome']) ?></h1>
-      <div class="hero-meta">
-        <span><i class="bi bi-calendar-event me-1"></i><?= e(date('d/m/Y', strtotime($torneio['data']))) ?></span>
-        <span><i class="bi bi-clock me-1"></i>início <?= e($torneio['hora_inicio']) ?></span>
-        <span><i class="bi bi-geo-alt me-1"></i><?= e($torneio['local']) ?></span>
+    <div class="d-flex align-items-center gap-3">
+      <img src="/assets/img/logo.png" alt="" class="logo-hero">
+      <div>
+        <h1><?= e($torneio['nome']) ?></h1>
+        <div class="hero-meta">
+          <span><i class="bi bi-calendar-event me-1"></i><?= e(date('d/m/Y', strtotime($torneio['data']))) ?></span>
+          <span><i class="bi bi-clock me-1"></i>início <?= e($torneio['hora_inicio']) ?></span>
+          <span><i class="bi bi-geo-alt me-1"></i><?= e($torneio['local']) ?></span>
+        </div>
       </div>
     </div>
     <span class="selo-status selo-<?= e($torneio['status']) ?>"><?= e(Torneio::statusLabel($torneio['status'])) ?></span>

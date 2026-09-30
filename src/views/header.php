@@ -13,6 +13,7 @@ $activeNav = $activeNav ?? '';
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title><?= e($pageTitle) ?> · <?= e($torneioAtual['nome']) ?></title>
+<link rel="icon" href="/assets/img/logo.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -24,7 +25,10 @@ $activeNav = $activeNav ?? '';
 
 <nav class="navbar navbar-expand-lg navbar-dark navbar-torneio fixed-top">
   <div class="container">
-    <a class="navbar-brand" href="/index.php"><i class="bi bi-sun-fill me-1"></i><?= e($torneioAtual['nome']) ?></a>
+    <a class="navbar-brand d-flex align-items-center" href="/index.php">
+      <img src="/assets/img/logo.png" alt="" class="logo-navbar me-2">
+      <span><?= e($torneioAtual['nome']) ?></span>
+    </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
       <span class="navbar-toggler-icon"></span>
     </button>

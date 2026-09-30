@@ -11,7 +11,7 @@ final class Torneio
                 'INSERT INTO torneio (nome, data, local, hora_inicio, duracao_rodada_min, status)
                  VALUES (?, ?, ?, ?, ?, ?)'
             );
-            $stmt->execute(['NOME DO MEU TORNEIO', date('Y-m-d'), 'NOME DO LOCAL', '14:00', 30, 'nao_iniciado']);
+            $stmt->execute(['3º Torneio Entre Amigos', date('Y-m-d'), 'NOME DO LOCAL', '14:00', 30, 'nao_iniciado']);
             $row = $pdo->query('SELECT * FROM torneio ORDER BY id LIMIT 1')->fetch();
         }
         return $row;

@@ -33,8 +33,7 @@ final class Times
         }
         $stmt = $pdo->prepare('INSERT INTO times (codigo, nome) VALUES (?, ?)');
         for ($i = 1; $i <= 9; $i++) {
-            $codigo = 'T' . $i;
-            $stmt->execute([$codigo, $codigo]);
+            $stmt->execute(['T' . $i, 'Time ' . $i]);
         }
     }
 

@@ -13,6 +13,7 @@ $rankingAlerta = Ranking::calcular();
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title><?= e($pageTitle ?? 'Admin') ?> · Admin · <?= e($torneioAtual['nome']) ?></title>
+<link rel="icon" href="/assets/img/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -23,7 +24,10 @@ $rankingAlerta = Ranking::calcular();
 
 <nav class="navbar navbar-expand-lg navbar-dark navbar-torneio fixed-top">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/admin/dashboard.php"><i class="bi bi-shield-lock-fill me-1"></i>Admin · <?= e($torneioAtual['nome']) ?></a>
+    <a class="navbar-brand d-flex align-items-center" href="/admin/dashboard.php">
+      <img src="/assets/img/logo.png" alt="" class="logo-navbar me-2">
+      <span><i class="bi bi-shield-lock-fill me-1"></i>Admin · <?= e($torneioAtual['nome']) ?></span>
+    </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navAdmin">
       <span class="navbar-toggler-icon"></span>
     </button>

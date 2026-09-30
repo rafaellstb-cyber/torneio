@@ -1,16 +1,18 @@
 :root {
-    --navy-1: #0b1f3a;
-    --navy-2: #143d66;
-    --accent: #ffb703;
+    /* Paleta baseada na logo do #3 Torneio Entre Amigos: azul-petróleo, laranja e amarelo-sol */
+    --navy-1: #0c3a49;
+    --navy-2: #146b81;
+    --accent: #f2661e;
+    --accent-2: #ffc93d;
     --verde-bg: #d9f2df;
     --verde-txt: #157347;
     --vermelho-bg: #fbdcdc;
     --vermelho-txt: #b02a2a;
     --cinza-bg: #eef0f3;
     --cinza-txt: #6c757d;
-    --quadra1: #1d6fd8;
-    --quadra2: #8a3ffc;
-    --quadra3: #0e9384;
+    --quadra1: #146b81;
+    --quadra2: #f2661e;
+    --quadra3: #c98a00;
     --ouro: #d4af37;
     --prata: #9aa5b1;
     --bronze: #b06a34;
@@ -45,10 +47,20 @@ h1, h2, h3, h4, h5, .titulo-condensado, .placar-grande, .stat-numero {
     font-weight: 700;
     letter-spacing: .03em;
     color: #fff;
+    min-width: 0;
+}
+.navbar-torneio .navbar-brand span {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    max-width: 68vw;
+    display: inline-block;
+    max-width: 55vw;
+    vertical-align: middle;
+}
+.logo-navbar {
+    height: 36px;
+    width: auto;
+    flex-shrink: 0;
 }
 .navbar-torneio .nav-link {
     color: rgba(255,255,255,.85) !important;
@@ -78,6 +90,15 @@ h1, h2, h3, h4, h5, .titulo-condensado, .placar-grande, .stat-numero {
     font-size: 2rem;
     font-weight: 700;
     margin-bottom: .25rem;
+}
+.logo-hero {
+    height: 64px;
+    width: auto;
+    flex-shrink: 0;
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,.25));
+}
+@media (max-width: 420px) {
+    .logo-hero { height: 48px; }
 }
 .hero-meta {
     opacity: .9;
