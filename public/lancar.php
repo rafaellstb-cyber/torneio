@@ -136,7 +136,16 @@ ob_start();
 
       <?php if ($aba === 'encerrados'): ?>
         <div class="p-3">
-          <p class="mb-1"><?= e(Views::nomeTime($t1)) ?> <strong><?= (int) $jogo['pontos1'] ?></strong> x <strong><?= (int) $jogo['pontos2'] ?></strong> <?= e(Views::nomeTime($t2)) ?></p>
+          <p class="mb-1">
+            <span class="nome-time"><?= e(Views::nomeTime($t1)) ?></span> <strong><?= (int) $jogo['pontos1'] ?></strong>
+            x
+            <strong><?= (int) $jogo['pontos2'] ?></strong> <span class="nome-time"><?= e(Views::nomeTime($t2)) ?></span>
+          </p>
+          <?php if (Views::atletas($t1) !== '' || Views::atletas($t2) !== ''): ?>
+            <p class="atletas-time mb-1">
+              <?= e(Views::atletas($t1)) ?><?= Views::atletas($t1) !== '' && Views::atletas($t2) !== '' ? ' · ' : '' ?><?= e(Views::atletas($t2)) ?>
+            </p>
+          <?php endif; ?>
           <p class="cadeado-resultado small mb-0"><i class="bi bi-lock-fill me-1"></i>Resultado registrado. Correções somente pelo administrador.</p>
         </div>
       <?php elseif (!$t1 || !$t2): ?>
@@ -147,13 +156,15 @@ ob_start();
           <input type="hidden" name="jogo_id" value="<?= (int) $jogo['id'] ?>">
           <div class="d-flex align-items-center justify-content-center gap-3">
             <div class="text-center">
-              <label class="form-label small d-block"><?= e($t1['nome']) ?></label>
-              <input type="number" min="0" max="99" name="pontos1" class="form-control placar-input" required>
+              <label class="form-label small d-block nome-time"><?= e($t1['nome']) ?></label>
+              <?php if (Views::atletas($t1) !== ''): ?><span class="atletas-time mb-1"><?= e(Views::atletas($t1)) ?></span><?php endif; ?>
+              <input type="number" min="0" max="99" name="pontos1" class="form-control placar-input mt-1" required>
             </div>
             <span class="fs-4 text-muted">x</span>
             <div class="text-center">
-              <label class="form-label small d-block"><?= e($t2['nome']) ?></label>
-              <input type="number" min="0" max="99" name="pontos2" class="form-control placar-input" required>
+              <label class="form-label small d-block nome-time"><?= e($t2['nome']) ?></label>
+              <?php if (Views::atletas($t2) !== ''): ?><span class="atletas-time mb-1"><?= e(Views::atletas($t2)) ?></span><?php endif; ?>
+              <input type="number" min="0" max="99" name="pontos2" class="form-control placar-input mt-1" required>
             </div>
           </div>
           <button type="submit" class="btn btn-success w-100 mt-3"><i class="bi bi-check-lg me-1"></i>Salvar resultado</button>

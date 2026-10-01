@@ -43,7 +43,7 @@ final class Views
         return $time ? $time['nome'] : 'A definir';
     }
 
-    private static function atletas(?array $time): string
+    public static function atletas(?array $time): string
     {
         return $time && !empty($time['atletas']) ? trim($time['atletas']) : '';
     }

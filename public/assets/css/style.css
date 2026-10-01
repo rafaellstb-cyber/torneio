@@ -187,7 +187,7 @@ h1, h2, h3, h4, h5, .titulo-condensado, .placar-grande, .stat-numero {
 }
 .jogo-bloco-time.vencedor { background: var(--verde-bg); }
 .jogo-bloco-time.perdedor { background: var(--vermelho-bg); }
-.jogo-bloco-time .nome-time { font-weight: 600; }
+.nome-time { font-weight: 600; }
 .jogo-bloco-time .origem-time { font-size: .75rem; color: #6c757d; display: block; }
 .atletas-time {
     font-size: .74rem;
