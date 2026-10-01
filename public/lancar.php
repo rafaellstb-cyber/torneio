@@ -155,14 +155,14 @@ ob_start();
           <?= Csrf::field() ?>
           <input type="hidden" name="jogo_id" value="<?= (int) $jogo['id'] ?>">
           <div class="d-flex align-items-center justify-content-center gap-3">
-            <div class="text-center">
-              <label class="form-label small d-block nome-time"><?= e($t1['nome']) ?></label>
+            <div class="text-center placar-coluna-time">
+              <label class="form-label d-block nome-time nome-time-grande"><?= e($t1['nome']) ?></label>
               <?php if (Views::atletas($t1) !== ''): ?><span class="atletas-time mb-1"><?= e(Views::atletas($t1)) ?></span><?php endif; ?>
               <input type="number" min="0" max="99" name="pontos1" class="form-control placar-input mt-1" required>
             </div>
             <span class="fs-4 text-muted">x</span>
-            <div class="text-center">
-              <label class="form-label small d-block nome-time"><?= e($t2['nome']) ?></label>
+            <div class="text-center placar-coluna-time">
+              <label class="form-label d-block nome-time nome-time-grande"><?= e($t2['nome']) ?></label>
               <?php if (Views::atletas($t2) !== ''): ?><span class="atletas-time mb-1"><?= e(Views::atletas($t2)) ?></span><?php endif; ?>
               <input type="number" min="0" max="99" name="pontos2" class="form-control placar-input mt-1" required>
             </div>

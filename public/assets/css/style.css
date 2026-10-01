@@ -307,7 +307,9 @@ h1, h2, h3, h4, h5, .titulo-condensado, .placar-grande, .stat-numero {
 .chave-jogo .cabecalho-chave { font-size: .72rem; color: #6c757d; padding: .3rem .7rem 0; }
 
 /* ---------- Formulário de lançamento ---------- */
-.placar-input { max-width: 90px; font-size: 1.4rem; text-align: center; font-family: var(--font-titulo); }
+.placar-coluna-time { max-width: 160px; }
+.nome-time-grande { font-size: 1.15rem; }
+.placar-input { max-width: 90px; margin: 0 auto; font-size: 1.4rem; text-align: center; font-family: var(--font-titulo); }
 .cadeado-resultado { color: var(--cinza-txt); }
 
 /* ---------- Admin ---------- */
