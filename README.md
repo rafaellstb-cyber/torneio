@@ -41,28 +41,35 @@ php scripts/criar_admin.php meu_usuario minha_senha_forte
 
 ## Publicando em hospedagem compartilhada
 
-1. Envie todos os arquivos do projeto para o servidor.
-2. Aponte o **document root** do domínio/subdomínio para a pasta `public/`. Se sua hospedagem
-   não permitir escolher o document root (algumas hospedagens só servem a partir de
-   `public_html`), copie o *conteúdo* de `public/` para `public_html/` e mantenha `config/`,
-   `src/`, `database/`, `scripts/` e `tests/` **fora** dela (um nível acima). Cada uma dessas
-   pastas já tem um `.htaccess` com `Require all denied` como proteção extra caso isso não seja
-   possível.
-3. Garanta que a pasta `database/` tenha permissão de escrita (o SQLite é criado automaticamente
-   no primeiro acesso).
-4. Popule o banco (times, calendário e o primeiro admin). Duas opções:
-   - **Com acesso SSH/CLI:** `php scripts/seed.php` (veja acima).
+A pasta `public/` é a única coisa que vai pro servidor — ela já contém tudo (`src/`, `config/`,
+`database/` ficam **dentro** dela), então funciona mesmo em hospedagens gratuitas que só deixam
+enviar arquivos para dentro de uma pasta específica (ex.: `htdocs/` na InfinityFree,
+`public_html/` em outras).
+
+1. Envie o **conteúdo** da pasta `public/` (tudo que tem dentro dela, não a pasta `public` em
+   si) para a pasta pública do seu servidor (`htdocs/`, `public_html/`, `www/` — o nome muda
+   conforme a hospedagem). No final, o arquivo `index.php` do site precisa estar direto dentro
+   dessa pasta pública, não dentro de uma subpasta `public/`.
+   As pastas `src/`, `config/` e `database/` vão junto, como subpastas dessa mesma pasta pública
+   — cada uma já tem um `.htaccess` com `Require all denied`, que bloqueia qualquer acesso
+   direto pelo navegador (um servidor Apache, como o da InfinityFree, respeita isso
+   automaticamente).
+2. Garanta que a pasta `database/` tenha permissão de escrita (o SQLite é criado automaticamente
+   no primeiro acesso). A maioria das hospedagens já deixa isso correto por padrão.
+3. Popule o banco (times, calendário e o primeiro admin). Duas opções:
+   - **Com acesso SSH/CLI:** `php scripts/seed.php` (veja acima) — note que, no servidor, o
+     caminho de `src/bootstrap.php` passa a ser relativo à pasta pública, então esse comando é
+     só para rodar localmente; no servidor use a opção abaixo.
    - **Sem SSH** (a maioria das hospedagens gratuitas): acesse `https://seu-dominio/instalar.php`
      pelo navegador. É um formulário único que pede os dados do torneio e cria o primeiro
      usuário admin com a senha que você escolher. Só funciona uma vez — depois que os times
-     existem, a página se desativa sozinha. **Apague o arquivo `public/instalar.php` do
-     servidor assim que terminar**, por segurança (mesmo desativada, é uma página a menos
-     exposta publicamente).
-5. Acesse `/admin/` e ajuste nome do torneio, data, local e horário em **Torneio**, se precisar.
+     existem, a página se desativa sozinha. **Apague o arquivo `instalar.php` do servidor assim
+     que terminar**, por segurança (mesmo desativada, é uma página a menos exposta publicamente).
+4. Acesse `/admin/` e ajuste nome do torneio, data, local e horário em **Torneio**, se precisar.
 
 ### Usando MySQL em vez de SQLite
 
-Edite `config/config.php`:
+Edite `public/config/config.php`:
 
 ```php
 'db' => [
@@ -159,14 +166,22 @@ Isso executa, em processos separados, todos os arquivos `tests/*_test.php`:
 ## Estrutura de pastas
 
 ```
-config/     config.php (banco de dados, timezone) — protegido por .htaccess
-database/   schema_sqlite.sql, schema_mysql.sql, torneio.sqlite (gerado, git-ignorado)
-src/        classes de domínio (Database, Auth, Jogos, Ranking, MataMata, Horarios, Views...)
-            e as views compartilhadas (src/views/) — tudo protegido por .htaccess
-public/     document root: páginas públicas, área admin (public/admin/) e assets estáticos
-scripts/    seed.php, simular.php, criar_admin.php (linha de comando)
-tests/      testes automatizados (tests/run.php roda todos)
+public/             tudo que vai pro servidor (é o que você envia por FTP)
+  config/           config.php (banco de dados, timezone) — protegido por .htaccess
+  database/         schema_sqlite.sql, schema_mysql.sql, torneio.sqlite (gerado, git-ignorado)
+  src/              classes de domínio (Database, Auth, Jogos, Ranking, MataMata, Views...)
+                    e as views compartilhadas (src/views/) — protegido por .htaccess
+  admin/            área administrativa
+  assets/           CSS, JS, imagens
+  index.php, ranking.php, jogos.php, mata-mata.php, lancar.php, instalar.php
+scripts/            seed.php, simular.php, criar_admin.php — rodam localmente, não vão pro servidor
+tests/              testes automatizados (tests/run.php roda todos) — idem, só uso local
 ```
+
+`config/`, `database/` e `src/` ficam dentro de `public/` de propósito: assim o projeto inteiro
+cabe numa única pasta enviada ao servidor, o que funciona mesmo em hospedagens que só permitem
+upload dentro da pasta pública (como a InfinityFree). A proteção contra acesso direto pelo
+navegador vem dos arquivos `.htaccess` dentro de cada uma.
 
 ## Segurança
 

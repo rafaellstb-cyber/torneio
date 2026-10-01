@@ -10,7 +10,7 @@ declare(strict_types=1);
  *   php scripts/simular.php --empates     → margens fixas que geram empates pendentes de propósito
  */
 
-require __DIR__ . '/../src/bootstrap.php';
+require __DIR__ . '/../public/src/bootstrap.php';
 
 $modoEmpates = in_array('--empates', $argv, true);
 

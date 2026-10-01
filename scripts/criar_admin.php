@@ -7,7 +7,7 @@ declare(strict_types=1);
  * Uso: php scripts/criar_admin.php <usuario> <senha>
  */
 
-require __DIR__ . '/../src/bootstrap.php';
+require __DIR__ . '/../public/src/bootstrap.php';
 
 $usuario = $argv[1] ?? null;
 $senha = $argv[2] ?? null;

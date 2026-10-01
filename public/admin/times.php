@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-require __DIR__ . '/../../src/bootstrap.php';
+require __DIR__ . '/../src/bootstrap.php';
 Auth::requireLogin('/admin/index.php');
 
 $mensagem = null;
@@ -22,7 +22,7 @@ $times = Times::todos();
 
 $pageTitle = 'Times';
 $activeAdminNav = 'times';
-require __DIR__ . '/../../src/views/admin_header.php';
+require __DIR__ . '/../src/views/admin_header.php';
 ?>
 
 <h1 class="h4 mb-3">Times</h1>
@@ -52,4 +52,4 @@ require __DIR__ . '/../../src/views/admin_header.php';
 <?php endforeach; ?>
 </div>
 
-<?php require __DIR__ . '/../../src/views/admin_footer.php'; ?>
+<?php require __DIR__ . '/../src/views/admin_footer.php'; ?>

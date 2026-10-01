@@ -34,6 +34,6 @@ function e(?string $value): string
  */
 function asset_v(string $publicRelativePath): string
 {
-    $full = __DIR__ . '/../public/' . ltrim($publicRelativePath, '/');
+    $full = __DIR__ . '/../' . ltrim($publicRelativePath, '/');
     return file_exists($full) ? (string) filemtime($full) : '1';
 }

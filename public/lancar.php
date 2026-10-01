@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-require __DIR__ . '/../src/bootstrap.php';
+require __DIR__ . '/src/bootstrap.php';
 
 $mensagemErro = null;
 $mensagemSucesso = null;
@@ -170,6 +170,6 @@ $conteudo = ob_get_clean();
 
 $pageTitle = 'Lançar resultado';
 $activeNav = 'lancar';
-require __DIR__ . '/../src/views/header.php';
+require __DIR__ . '/src/views/header.php';
 echo $conteudo;
-require __DIR__ . '/../src/views/footer.php';
+require __DIR__ . '/src/views/footer.php';

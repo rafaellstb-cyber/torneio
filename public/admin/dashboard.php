@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-require __DIR__ . '/../../src/bootstrap.php';
+require __DIR__ . '/../src/bootstrap.php';
 Auth::requireLogin('/admin/index.php');
 
 $torneio = Torneio::get();
@@ -13,7 +13,7 @@ $times = Times::mapaPorId();
 
 $pageTitle = 'Painel';
 $activeAdminNav = 'dashboard';
-require __DIR__ . '/../../src/views/admin_header.php';
+require __DIR__ . '/../src/views/admin_header.php';
 ?>
 
 <h1 class="h4 mb-3">Painel do torneio</h1>
@@ -101,4 +101,4 @@ require __DIR__ . '/../../src/views/admin_header.php';
   </table>
 </div>
 
-<?php require __DIR__ . '/../../src/views/admin_footer.php'; ?>
+<?php require __DIR__ . '/../src/views/admin_footer.php'; ?>

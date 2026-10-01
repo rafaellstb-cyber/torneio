@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-require __DIR__ . '/../src/bootstrap.php';
+require __DIR__ . '/src/bootstrap.php';
 
 $times = Times::mapaPorId();
 $gerado = MataMata::jaGerado();
@@ -66,8 +66,8 @@ if (isset($_GET['_frag'])) {
 
 $pageTitle = 'Mata-mata';
 $activeNav = 'matamata';
-require __DIR__ . '/../src/views/header.php';
+require __DIR__ . '/src/views/header.php';
 echo $cabecalho;
 echo Views::indicadorAtualizacao();
 echo '<div data-autorefresh id="conteudo-auto">' . $conteudoAuto . '</div>';
-require __DIR__ . '/../src/views/footer.php';
+require __DIR__ . '/src/views/footer.php';

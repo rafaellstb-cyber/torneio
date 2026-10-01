@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-require __DIR__ . '/../src/bootstrap.php';
+require __DIR__ . '/src/bootstrap.php';
 
 $rodadaLabels = [
     '1' => 'Rodada 1', '2' => 'Rodada 2', '3' => 'Rodada 3',
@@ -125,8 +125,8 @@ if (isset($_GET['_frag'])) {
 
 $pageTitle = 'Jogos';
 $activeNav = 'jogos';
-require __DIR__ . '/../src/views/header.php';
+require __DIR__ . '/src/views/header.php';
 echo $cabecalho;
 echo Views::indicadorAtualizacao();
 echo '<div data-autorefresh id="conteudo-auto">' . $conteudoAuto . '</div>';
-require __DIR__ . '/../src/views/footer.php';
+require __DIR__ . '/src/views/footer.php';
